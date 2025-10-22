@@ -6,7 +6,6 @@ from pathlib import Path
 import time
 
 from phy_utils import copy_most_files, run_phy, copy_changed_files
-from create_cluster_info import create_cluster_info
 
 def set_up_logging(log_path: Path):
     logging.root.handlers = []
@@ -45,11 +44,6 @@ def phy_main(
 
     # Note the starting time, so we can find files that changed during curation.
     start_time = time.time()
-
-    # Create cluster_info.tsv, whether we run interactive phy or not.
-    params_py_temp_path = Path(phy_temp_path, params_py_path.name)
-    logging.info(f"Creating initial cluster_info.tsv in: {phy_temp_path}")
-    create_cluster_info(params_py_temp_path)
 
     if interactive:
         # Run Phy.

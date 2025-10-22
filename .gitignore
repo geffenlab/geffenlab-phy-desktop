@@ -1,6 +1,7 @@
 /data/
 code/__pycache__
 results/
+.vscode/
 
 phy-data-master/
 phy-data.zip
