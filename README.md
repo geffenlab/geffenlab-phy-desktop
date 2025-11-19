@@ -2,6 +2,15 @@
 
 This sets up a Docker environment with [Phy](https://github.com/cortex-lab/phy) installed.
 
+# Phy sample data
+
+The Phy project has some sample data that might help with testing.
+
+```
+wget https://codeload.github.com/kwikteam/phy-data/zip/master -O phy-data.zip
+unzip phy-data.zip
+```
+
 # Building Docker image versions
 
 This repo is configured to automatically build and publish a new Docker image version, each time a [repo tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) is pushed to GitHub.
