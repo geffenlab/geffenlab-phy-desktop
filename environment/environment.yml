@@ -25,4 +25,4 @@ dependencies:
   - scikit-learn=1.6.1
   - joblib=1.4.2
   - pip:
-    - git+https://github.com/cortex-lab/phy.git@7a2494be37a47f26f1f87e1ad3e022823f0f3dd1#egg=phy
+    - git+https://github.com/cortex-lab/phy.git@fbdcb570f3b1ec929cd83f09a2ebcbe2f2605f67#egg=phy
