@@ -6,7 +6,7 @@ Geffen lab users should be able to use this image via the [run_phy.py](https://g
 
 It's also possible to run Phy from this image directly via `docker run`, see two examples below.
 
-# Lifecycle of this Phy images
+# Lifecycle of this Phy image
 
 This repository defines a Phy [environment](./environment/), including Phy itself and its dependencies.  These can be edited, committed, and pushed to this repository on GitHub.
 
@@ -14,11 +14,11 @@ This repository is the source of truth for this Phy environment, but we don't ru
 
 The `geffenlab-ephys-pipeline` [run_phy.py](https://github.com/geffenlab/geffenlab-ephys-pipeline/blob/master/scripts/run_phy.py#L102) script refers to this Docker image via its `--docker-image` command line argument.
 
-## Creating new nersions of the Docker image
+## Creating new versions of the Docker image
 
 This repository is configured to automatically build and publish a new Docker image, each time a [repository tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) is pushed to GitHub.
 
-The published images are located in the GitHub Container Registry as [geffenlab-phy-desktop](https://github.com/benjamin-heasly/geffenlab-phy-desktop/pkgs/container/geffenlab-phy-desktop).  You can find the latest and previous versions of the step's Docker image there.
+The published images are located in the GitHub Container Registry as [geffenlab-phy-desktop](https://github.com/benjamin-heasly/geffenlab-phy-desktop/pkgs/container/geffenlab-phy-desktop).  You can find the latest and previous versions of the Docker image there.
 
 ## Example update workflow
 
@@ -48,21 +48,21 @@ When you `git push --tags`, GitHub will detect your new version and kick off a f
 
 You can see the code for this automated workflow in this repository at [build-tag.yml](./.github/workflows/build-tag.yml).
 
-You can follow the progress of the Docker image build at the step [Actions](https://github.com/benjamin-heasly/geffenlab-phy-desktop/actions) page.  When the build completes you should see a new [published version](https://github.com/benjamin-heasly/geffenlab-phy-desktop/pkgs/container/geffenlab-phy-desktop) with the version tag you provided, like `v0.0.5`.
+You can follow the progress of the Docker image build at the repository [Actions](https://github.com/benjamin-heasly/geffenlab-phy-desktop/actions) page.  When the build completes you should see a new [published version](https://github.com/benjamin-heasly/geffenlab-phy-desktop/pkgs/container/geffenlab-phy-desktop) with the version tag you provided, like `v0.0.5`.
 
 ## Update the `run_phy.py` script
 
-When your step's new Docker image is ready you can update your calling code, for example the Geffen lab's [run_phy.py]([run_phy.py](https://github.com/geffenlab/geffenlab-ephys-pipeline/blob/master/scripts/run_phy.py#L102)) script, to use your new version number.
+When your new Docker image is ready you can update your calling code, for example the Geffen lab's [run_phy.py](https://github.com/geffenlab/geffenlab-ephys-pipeline/blob/master/scripts/run_phy.py#L102) script, to use your new version number.
 
 ### older verions are still OK
 
-Older Docker images will remain, saved on GitHub, available for use, even after you create a new version.  This means new image versions are always optional.  You can update your calling code to use new versions when you're ready.  Different people and different pipelines can use different versions of the Phy environment without interference.
+Older Docker images will remain, saved on GitHub, available for use, even after you create a new version.  This means new image versions are always optional.  You can update your calling code to use new versions when you're ready.  Different people can use different versions of the Phy environment without interference.
 
 # Running Phy via `docker run`
 
 Running Phy (or any GUI app) inside a container works, but takes some configuration.  The app needs to have access to display resources on the host, and these can vary depending on where the app is running.  Here are two examples that work with X11 displays.
 
-## Local desktop
+## local desktop
 
 Running locally is the easiest -- sitting at a computer with a display attached and X11 already running.  Here's a `docker run` command that should work locally:
 
@@ -79,7 +79,7 @@ docker run --rm --user $(id -u):$(id -g) \
   ghcr.io/benjamin-heasly/geffenlab-phy-desktop:v0.0.5 /opt/code/conda_run python /opt/code/run_phy.py
 ```
 
-## Remote server via `ssh -Y`
+## remote server via `ssh -Y`
 
 Running on a remote server should also work, via `ssh -Y`.  In this mode Phy itself would be running on a remote server, but the X11 display would be running on your local machine.  To make this work, `ssh` on your local machine and `sshd` on the server work together to set up a TCP tunnel, allowing the remote app to connect to your local display server.  Here's a `docker run` command that should work via `ssh -Y`.
 
